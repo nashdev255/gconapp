@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@frontend/*": ["frontend/src/*"],
+      "@backend/*": ["backend/src/*"]
+    }
+  },
+  "include": ["frontend/**/*", "backend/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

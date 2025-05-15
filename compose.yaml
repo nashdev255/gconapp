@@ -1,0 +1,39 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .frontend:/app/frontend
+    working_dir: /app/frontend
+    command: npm run dev
+    develop:
+      watch:
+        - path: ./frontend
+          target: /app
+          action: sync
+    environment:
+      - NODE_ENV=development
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app/backend
+    working_dir: /app/backend
+    command: npm run start
+    develop:
+      watch:
+        - path: ./backend
+          target: /app
+          action: sync
+    environment:
+      - FIREBASE_API_KEY=${FIREBASE_API_KEY}
+      - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+    env_file:
+      - .env
